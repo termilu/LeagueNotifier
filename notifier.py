@@ -4,12 +4,13 @@ import time
 # Riot API Key and Summoner Info
 RIOT_API_KEY = 'YourAPIKeyHere'
 DISCORD_WEBHOOK_URL = 'YourWebhookURLHere'
+ROLE_TO_PING = '<@&YourRoleIDHere>'
 
 # List of summoner names (you can add more accounts here)
 SUMMONER_NAMES = [
-    'fencebarcode',  # This will use the default tag EUW
-    'termilu#julie',  # This has a specific tag
-    'Αrt The Clοwn#EUW',     # Example with a generic tag
+    'name',  # This will use the default tag EUW
+    'name2#customTag',  # This has a specific tag
+    'name3#EUW',     # Example with a generic tag
 ]
 
 # Function to split summoner name into gameName and tagLine (without including the #)
@@ -102,10 +103,10 @@ def notify_users():
                 
                 if '#' in summoner_name:
                     # If tag is provided, use it only once after the dash in the URL
-                    message += f"https://www.op.gg/summoners/euw/{summoner_name_encoded.split('#')[0]}-{tag_line} <@&1290007745541570660>"
+                    message += f"https://www.op.gg/summoners/euw/{summoner_name_encoded.split('#')[0]}-{tag_line} {ROLE_TO_PING}"
                 else:
                     # If no specific tag is provided, include the default tag in the URL
-                    message += f"https://www.op.gg/summoners/euw/{summoner_name_encoded}-{tag_line} <@&1290007745541570660>"
+                    message += f"https://www.op.gg/summoners/euw/{summoner_name_encoded}-{tag_line} {ROLE_TO_PING}"
 
                 send_webhook_message(message)
                 print(message)
